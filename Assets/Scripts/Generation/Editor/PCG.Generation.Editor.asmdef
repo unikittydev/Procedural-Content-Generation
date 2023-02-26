@@ -1,0 +1,19 @@
+{
+    "name": "PCG.Generation.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:2af5bdc4f90af3a4ebb6b3c3d021d196",
+        "GUID:d8b63aba1907145bea998dd612889d6b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

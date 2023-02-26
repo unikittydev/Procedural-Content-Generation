@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Toggle label="Field name" value="false" focusable="true" name="Toggle" text=" " style="left: auto; flex-direction: row-reverse; -unity-background-scale-mode: stretch-to-fill; align-self: flex-start; justify-content: flex-start; align-items: center; flex-basis: auto; white-space: normal; -unity-text-align: upper-left;" />
+    <ui:VisualElement name="content" focusable="false" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); display: flex; flex-shrink: 1; margin-left: 22px;">
+        <ui:VisualElement name="fields" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); display: flex; height: auto; margin-left: 0; padding-left: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

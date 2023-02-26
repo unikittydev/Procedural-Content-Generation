@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9006ce8b609fc524b80c832244764b7b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - COGTree: {fileID: 9197481963319205126, guid: 376d0d4ac0f6ebe4b8f5e47474e193f9,
+      type: 3}
+  - COFTree: {fileID: 9197481963319205126, guid: 78577f33d95cbae478d551f443c5b07a,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

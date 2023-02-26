@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="UniformGeneratorPropertyDrawer" focusable="false" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); align-items: stretch; justify-content: flex-start; align-self: auto; flex-wrap: nowrap; flex-direction: row; flex-shrink: 1; position: relative; overflow: visible; white-space: normal; margin-left: 0; margin-right: 0; margin-top: 1px; margin-bottom: 1px;">
+        <ui:VisualElement name="min" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-self: stretch; justify-content: space-between; align-items: auto; margin-left: 0; width: 33.333%; flex-wrap: nowrap; padding-left: 3px; padding-right: 3px; padding-top: 1px; padding-bottom: 1px;">
+            <ui:VisualElement name="label-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 30%; align-items: auto; align-self: stretch; flex-shrink: 0; justify-content: center;">
+                <ui:Label tabindex="-1" text="min" display-tooltip-when-elided="true" name="Label" style="align-items: auto; align-self: flex-start; width: auto;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="property-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; align-self: flex-end; flex-shrink: 0;">
+                <uie:PropertyField binding-path="min" style="flex-shrink: 0; flex-direction: row; align-items: auto; justify-content: space-evenly; align-self: stretch;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="max" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-self: stretch; justify-content: space-between; align-items: auto; margin-left: 0; width: 33.333%; flex-wrap: nowrap; padding-left: 3px; padding-right: 3px; padding-top: 1px; padding-bottom: 1px;">
+            <ui:VisualElement name="label-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 30%; align-items: auto; align-self: stretch; flex-shrink: 0; justify-content: center;">
+                <ui:Label tabindex="-1" text="max" display-tooltip-when-elided="true" name="Label" style="align-items: auto; align-self: flex-start; width: auto;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="property-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; align-self: flex-end; flex-shrink: 0;">
+                <uie:PropertyField binding-path="max" style="flex-shrink: 0; flex-direction: row; align-items: auto; justify-content: space-evenly; align-self: stretch;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="mean" style="flex-grow: 0; background-color: rgba(0, 0, 0, 0); flex-direction: row; align-self: stretch; justify-content: space-between; align-items: auto; margin-left: 0; width: 33.333%; flex-wrap: nowrap; padding-left: 3px; padding-right: 3px; padding-top: 1px; padding-bottom: 1px;">
+            <ui:VisualElement name="label-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 30%; align-items: auto; align-self: stretch; flex-shrink: 0; justify-content: center;">
+                <ui:Label tabindex="-1" text="mean" display-tooltip-when-elided="true" name="Label" style="align-items: auto; align-self: flex-start; width: auto;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="property-out" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; align-self: flex-end; flex-shrink: 0;">
+                <uie:PropertyField binding-path="mean" style="flex-shrink: 0; flex-direction: row; align-items: auto; justify-content: space-evenly; align-self: stretch;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
