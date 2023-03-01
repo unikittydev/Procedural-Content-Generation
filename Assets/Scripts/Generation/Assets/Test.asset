@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465740cfee521c847a12d0b6a385cb8a, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  fieldA1: 0
-  fieldB1: 0
+  fieldA1: 1.2652314
+  fieldB1: 1
   fieldC1: 0
   fieldD1:
     fieldA2: 0

@@ -92,7 +92,6 @@ namespace PCG.Generation.Editor
             // Content display
             content.SetDisplay(toggle.value && children != null);
             toggle.RegisterValueChangedCallback(evt => content.SetDisplay(evt.newValue));
-
             
             if (children != null)
                 DrawChildrenFields(children, fields);

@@ -47,7 +47,7 @@ namespace PCG.Generation
         public override T Generate(ref Random random)
         {
             generationTree._currentObject = source.provider.GetObject();
-            generationTree.fieldTree.GenerateField(generationTree, ref random);
+            generationTree.fieldTree.GenerateField(ref generationTree, ref random);
             return generationTree._currentObject;
         }
 

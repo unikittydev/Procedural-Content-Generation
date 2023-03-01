@@ -8,35 +8,38 @@ using Random = Unity.Mathematics.Random;
 namespace PCG.Generation
 {
     [Serializable]
-    public abstract class CustomObjectField<TObj>
+    public abstract class CustomField<TObj>
     {
         public string fieldName;
         public bool generate;
 
-        public string generatorGenericTypeName;
+        public string fieldTypeName;
 
         [SerializeReference]
         public ObjectAlternative objectAlternative;
-        
-        public abstract void Update(FieldInfo field);
 
-        public abstract TObj GenerateField(TObj target, ref Random random);
-    }
-
-    [Serializable]
-    public abstract class CustomObjectField<TObj, TField> : CustomObjectField<TObj>
-    {
-        [NonSerialized] public ExpressionGetterDelegate<TObj, TField> getter;
-        [NonSerialized] public ExpressionSetterDelegate<TObj, TField> setter;
-
-        protected CustomObjectField(FieldInfo field)
+        protected CustomField(FieldInfo field)
         {
             fieldName = field.Name;
 
+            fieldTypeName = field.FieldType.AssemblyQualifiedName;
+        }
+        
+        public abstract void Update(FieldInfo field);
+
+        public abstract void GenerateField(ref TObj target, ref Random random);
+    }
+
+    [Serializable]
+    public abstract class CustomField<TObj, TField> : CustomField<TObj>
+    {
+        public ExpressionGetterDelegate<TObj, TField> getter;
+        public ExpressionSetterDelegate<TObj, TField> setter;
+
+        protected CustomField(FieldInfo field) : base(field)
+        {
             getter = CustomObjectFieldMapper<TObj, TField>.GetGetter(field);
             setter = CustomObjectFieldMapper<TObj, TField>.GetSetter(field);
-
-            generatorGenericTypeName = typeof(IGenerator<TField>).AssemblyQualifiedName;
 
             objectAlternative =
                 new ObjectAlternative(typeof(IGenerator<TField>), new[] { typeof(ScriptableObject) }, false, false);
@@ -50,45 +53,42 @@ namespace PCG.Generation
     }
 
     [Serializable]
-    public class CustomObjectLeafField<TObj, TField> : CustomObjectField<TObj, TField>
+    public class CustomLeafField<TObj, TField> : CustomField<TObj, TField>
     {
-        [SerializeReference] private IGenerator<TField> generator;
+        [SerializeReference] public IGenerator<TField> generator;
 
-        public CustomObjectLeafField(FieldInfo field) : base(field)
+        public CustomLeafField(FieldInfo field) : base(field)
         {
             if (objectAlternative.choice != null)
                 generator = (IGenerator<TField>)TypeMapper.CreateInstanceFromName(objectAlternative.choice);
         }
 
-        public override TObj GenerateField(TObj target, ref Random random)
+        public override void GenerateField(ref TObj target, ref Random random)
         {
-            var value = generator.Generate(ref random);
+            TField value = generator.Generate(ref random);
             setter(ref target, value);
-            return target;
         }
     }
 
     [Serializable]
-    public class CustomObjectNestedField<TObj, TField> : CustomObjectField<TObj, TField>
+    public class CustomNestedField<TObj, TField> : CustomField<TObj, TField>
     {
-        [SerializeReference] public List<CustomObjectField<TField>> children = new();
+        [SerializeReference] public List<CustomField<TField>> children = new();
 
-        public CustomObjectNestedField(FieldInfo field) : base(field)
+        public CustomNestedField(FieldInfo field) : base(field)
         {
             objectAlternative.AddChoice(typeof(CustomObjectGeneratorNestedType));
         }
 
-        public override TObj GenerateField(TObj target, ref Random random)
+        public override void GenerateField(ref TObj target, ref Random random)
         {
             TField nested = getter(target);
 
-            foreach (CustomObjectField<TField> child in children)
+            foreach (CustomField<TField> child in children)
                 if (child.generate)
-                    nested = child.GenerateField(nested, ref random);
-
+                    child.GenerateField(ref nested, ref random);
+            
             setter(ref target, nested);
-
-            return target;
         }
     }
 }

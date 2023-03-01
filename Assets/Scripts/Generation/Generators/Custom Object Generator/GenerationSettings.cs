@@ -6,7 +6,7 @@ namespace PCG.Generation
     [Serializable]
     public class GenerationSettings<T> where T : new()
     {
-        public CustomObjectNestedField<GenerationSettings<T>, T> fieldTree;
+        public CustomNestedField<GenerationSettings<T>, T> fieldTree;
 
         public T _currentObject;
 
@@ -17,14 +17,14 @@ namespace PCG.Generation
         
         public void BuildFieldTree()
         {
-            fieldTree = new CustomObjectNestedField<GenerationSettings<T>, T>(
+            fieldTree = new CustomNestedField<GenerationSettings<T>, T>(
                 typeof(GenerationSettings<T>).GetField(nameof(_currentObject),
                     BindingFlags.Instance | BindingFlags.Public));
 
             BuildNestedFieldChildren(fieldTree);
         }
 
-        private void BuildNestedFieldChildren<TObj, TField>(CustomObjectNestedField<TObj, TField> parent)
+        private void BuildNestedFieldChildren<TObj, TField>(CustomNestedField<TObj, TField> parent)
         {
             FieldInfo[] fields = typeof(TField).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
@@ -32,14 +32,14 @@ namespace PCG.Generation
                 BuildField(field, parent);
         }
 
-        private void BuildField<TObj, TField>(FieldInfo field, CustomObjectNestedField<TObj, TField> parent)
+        private void BuildField<TObj, TField>(FieldInfo field, CustomNestedField<TObj, TField> parent)
         {
             Type nestedChildType = field.FieldType.IsPrimitive
-                ? typeof(CustomObjectLeafField<,>)
-                : typeof(CustomObjectNestedField<,>);
+                ? typeof(CustomLeafField<,>)
+                : typeof(CustomNestedField<,>);
             Type nestedChildFieldType = nestedChildType.MakeGenericType(typeof(TField), field.FieldType);
 
-            var nestedChild = Activator.CreateInstance(nestedChildFieldType, field) as CustomObjectField<TField>;
+            var nestedChild = Activator.CreateInstance(nestedChildFieldType, field) as CustomField<TField>;
             parent.children.Add(nestedChild);
 
             if (field.FieldType.IsPrimitive) return;
@@ -58,7 +58,7 @@ namespace PCG.Generation
             return UpdateField(field, fieldTree);
         }
 
-        private bool UpdateNestedFieldChildren<TObj, TField>(CustomObjectNestedField<TObj, TField> parent)
+        private bool UpdateNestedFieldChildren<TObj, TField>(CustomNestedField<TObj, TField> parent)
         {
             FieldInfo[] fields = typeof(TField).GetFields(BindingFlags.Public | BindingFlags.Instance);
 
@@ -68,7 +68,7 @@ namespace PCG.Generation
             for (int i = 0; i < fields.Length; i++)
             {
                 FieldInfo info = fields[i];
-                CustomObjectField<TField> cof = parent.children[i];
+                CustomField<TField> cof = parent.children[i];
                 if (!UpdateField(info, cof))
                     return false;
             }
@@ -76,10 +76,10 @@ namespace PCG.Generation
             return true;
         }
 
-        private bool UpdateField<TField>(FieldInfo field, CustomObjectField<TField> child)
+        private bool UpdateField<TField>(FieldInfo field, CustomField<TField> child)
         {
             if (field.Name != child.fieldName ||
-                typeof(IGenerator<>).MakeGenericType(field.FieldType).AssemblyQualifiedName != child.generatorGenericTypeName)
+                field.FieldType.AssemblyQualifiedName != child.fieldTypeName)
                 return false;
 
             child.Update(field);
