@@ -1,8 +1,10 @@
 
+using System.Collections.Generic;
+
 namespace PCG.Generation
 {
-    public interface ICollectionProvider<out TCollection>
+    public interface ICollectionProvider<out T>
     {
-        TCollection GetCollection();
+        IEnumerable<T> GetCollection();
     }
 }

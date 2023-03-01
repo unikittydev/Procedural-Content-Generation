@@ -10,11 +10,11 @@ namespace PCG.Generation
         public abstract void GenerateField(ref TObj target, ref Random random);
     }
     
-    public abstract class CustomObjectFieldGeneration<TCustomField, TObj> : CustomObjectFieldGeneration<TObj> where TCustomField : CustomField<TObj>
+    public abstract class CustomObjectFieldGeneration<TCustomField, TObj> : CustomObjectFieldGeneration<TObj> where TCustomField : CustomField
     {
         protected TCustomField field;
         
-        public CustomObjectFieldGeneration(TCustomField field)
+        protected CustomObjectFieldGeneration(TCustomField field)
         {
             this.field = field;
         }
@@ -22,7 +22,7 @@ namespace PCG.Generation
 
     public class CustomObjectLeafFieldGeneration<TObj, TField> : CustomObjectFieldGeneration<CustomLeafField<TObj, TField>, TObj>
     {
-        protected ExpressionSetterDelegate<TObj, TField> setter;
+        private ExpressionSetterDelegate<TObj, TField> setter;
         
         public CustomObjectLeafFieldGeneration(CustomLeafField<TObj, TField> field) : base(field)
         {
@@ -56,7 +56,7 @@ namespace PCG.Generation
 
         private void CreateGenerationChildren()
         {
-            foreach (CustomField<TField> fieldChild in field.children)
+            foreach (CustomField fieldChild in field.children)
             {
                 Type fieldChildType = fieldChild.GetType().GetGenericTypeDefinition();
                 Type[] fieldChildParams = { typeof(TField), fieldChild.info.FieldType };

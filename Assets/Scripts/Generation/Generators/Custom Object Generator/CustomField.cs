@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-using Random = Unity.Mathematics.Random;
-
 namespace PCG.Generation
 {
     [Serializable]
-    public abstract class CustomField<TObj>
+    public abstract class CustomField
     {
         [NonSerialized]
         public FieldInfo info;
@@ -32,7 +30,7 @@ namespace PCG.Generation
     }
 
     [Serializable]
-    public abstract class CustomField<TObj, TField> : CustomField<TObj>
+    public abstract class CustomField<TObj, TField> : CustomField
     {
         protected CustomField(FieldInfo field) : base(field)
         {
@@ -56,7 +54,7 @@ namespace PCG.Generation
     [Serializable]
     public class CustomNestedField<TObj, TField> : CustomField<TObj, TField>
     {
-        [SerializeReference] public List<CustomField<TField>> children = new();
+        [SerializeReference] public List<CustomField> children = new();
 
         public CustomNestedField(FieldInfo field) : base(field)
         {

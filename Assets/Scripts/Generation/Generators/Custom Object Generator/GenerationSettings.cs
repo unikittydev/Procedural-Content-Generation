@@ -8,7 +8,7 @@ namespace PCG.Generation
     {
         public CustomNestedField<GenerationSettings<T>, T> fieldTree;
 
-        public T _currentObject;
+        public T currentObject;
 
         public GenerationSettings()
         {
@@ -18,7 +18,7 @@ namespace PCG.Generation
         public void BuildFieldTree()
         {
             fieldTree = new CustomNestedField<GenerationSettings<T>, T>(
-                typeof(GenerationSettings<T>).GetField(nameof(_currentObject),
+                typeof(GenerationSettings<T>).GetField(nameof(currentObject),
                     BindingFlags.Instance | BindingFlags.Public)) { generate = true };
 
             BuildNestedFieldChildren(fieldTree);
@@ -39,7 +39,7 @@ namespace PCG.Generation
                 : typeof(CustomNestedField<,>);
             Type nestedChildFieldType = nestedChildType.MakeGenericType(typeof(TField), field.FieldType);
 
-            var nestedChild = Activator.CreateInstance(nestedChildFieldType, field) as CustomField<TField>;
+            var nestedChild = (CustomField)Activator.CreateInstance(nestedChildFieldType, field);
             parent.children.Add(nestedChild);
 
             if (field.FieldType.IsPrimitive) return;
@@ -53,9 +53,9 @@ namespace PCG.Generation
         
         public bool UpdateFieldTree()
         {
-            FieldInfo field = typeof(GenerationSettings<T>).GetField(nameof(_currentObject),
+            FieldInfo field = typeof(GenerationSettings<T>).GetField(nameof(currentObject),
                 BindingFlags.Instance | BindingFlags.Public);
-            return UpdateField(field, fieldTree);
+            return UpdateField<GenerationSettings<T>>(field, fieldTree);
         }
 
         private bool UpdateNestedFieldChildren<TObj, TField>(CustomNestedField<TObj, TField> parent)
@@ -68,15 +68,15 @@ namespace PCG.Generation
             for (int i = 0; i < fields.Length; i++)
             {
                 FieldInfo info = fields[i];
-                CustomField<TField> cof = parent.children[i];
-                if (!UpdateField(info, cof))
+                CustomField cof = parent.children[i];
+                if (!UpdateField<TField>(info, cof))
                     return false;
             }
 
             return true;
         }
 
-        private bool UpdateField<TField>(FieldInfo field, CustomField<TField> child)
+        private bool UpdateField<TField>(FieldInfo field, CustomField child)
         {
             if (field.Name != child.fieldName ||
                 field.FieldType.AssemblyQualifiedName != child.fieldTypeName)

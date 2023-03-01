@@ -4,17 +4,17 @@ using UnityEngine;
 namespace PCG.Generation
 {
     [Serializable]
-    public class CollectionSourceSettings<TCollection>
+    public class CollectionSourceSettings<T>
     {
         [SerializeReference]
         public ObjectAlternative providerAlternative;
         
         [SerializeReference]
-        public ICollectionProvider<TCollection> provider;
+        public ICollectionProvider<T> provider;
 
         public CollectionSourceSettings()
         {
-            providerAlternative = new ObjectAlternative(typeof(ICollectionProvider<TCollection>), true);
+            providerAlternative = new ObjectAlternative(typeof(ICollectionProvider<T>), true);
         }
     }
 }

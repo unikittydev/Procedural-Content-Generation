@@ -17,10 +17,10 @@ namespace PCG.Generation
 
         [SerializeField] private GenerationSettings<T> generationTree = new();
 
-        private CustomObjectNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
-
         [SerializeField] private SourceSettings<T> source = new();
         
+        private CustomObjectNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
+
         [SerializeField] private int N;
 
         [SerializeField] private string typeName;
@@ -50,16 +50,16 @@ namespace PCG.Generation
 
         public override T Generate(ref Random random)
         {
-            generationTree._currentObject = source.provider.GetObject();
+            generationTree.currentObject = source.provider.GetObject();
             behaviourTree.GenerateField(ref generationTree, ref random);
-            return generationTree._currentObject;
+            return generationTree.currentObject;
         }
 
         public void Generate()
         {
             _generatorMarker.Begin();
             for (int i = 0; i < N; i++)
-                generationTree._currentObject = Generate(ref seed.random);
+                generationTree.currentObject = Generate(ref seed.random);
             _generatorMarker.End();
             Profiler.enabled = false;
         }
