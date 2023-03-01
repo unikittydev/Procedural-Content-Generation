@@ -19,7 +19,7 @@ namespace PCG.Generation
         {
             fieldTree = new CustomNestedField<GenerationSettings<T>, T>(
                 typeof(GenerationSettings<T>).GetField(nameof(_currentObject),
-                    BindingFlags.Instance | BindingFlags.Public));
+                    BindingFlags.Instance | BindingFlags.Public)) { generate = true };
 
             BuildNestedFieldChildren(fieldTree);
         }
@@ -82,7 +82,8 @@ namespace PCG.Generation
                 field.FieldType.AssemblyQualifiedName != child.fieldTypeName)
                 return false;
 
-            child.Update(field);
+            child.info = field;
+            
             if (field.FieldType.IsPrimitive)
                 return true;
 

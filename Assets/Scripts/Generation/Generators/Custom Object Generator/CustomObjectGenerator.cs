@@ -17,6 +17,8 @@ namespace PCG.Generation
 
         [SerializeField] private GenerationSettings<T> generationTree = new();
 
+        private CustomObjectNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
+
         [SerializeField] private SourceSettings<T> source = new();
         
         [SerializeField] private int N;
@@ -34,6 +36,8 @@ namespace PCG.Generation
                 Reset();
             else if (!generationTree.UpdateFieldTree())
                 Reset();
+
+            behaviourTree = new(generationTree.fieldTree);
         }
         
         private void Reset()
@@ -47,7 +51,7 @@ namespace PCG.Generation
         public override T Generate(ref Random random)
         {
             generationTree._currentObject = source.provider.GetObject();
-            generationTree.fieldTree.GenerateField(ref generationTree, ref random);
+            behaviourTree.GenerateField(ref generationTree, ref random);
             return generationTree._currentObject;
         }
 

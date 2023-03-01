@@ -10,7 +10,6 @@ namespace PCG.Generation
     {
         [SerializeField]
         private SeedSettings seed = new();
-        // ???
         [SerializeField]
         private GenerationSettings<T> generationTree = new();
         [SerializeField]
