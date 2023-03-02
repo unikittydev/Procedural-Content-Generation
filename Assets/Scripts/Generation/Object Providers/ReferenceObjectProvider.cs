@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace PCG.Generation
 {
+    [DisplayName("Reference")]
     [System.Serializable]
     public class ReferenceObjectProvider<T> : IObjectProvider<T>
     {

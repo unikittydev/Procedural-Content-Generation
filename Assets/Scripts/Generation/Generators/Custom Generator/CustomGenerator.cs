@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PCG.Generation
 {
@@ -11,9 +12,11 @@ namespace PCG.Generation
         where TSourceSettings : SourceSettings, new()
         where T : new()
     {
-        [SerializeField] protected SeedSettings seed = new();
+        protected virtual bool allowManaged => true;
         
-        [SerializeField] protected GenerationSettings<T> generationTree = new();
+        [SerializeField] protected SeedSettings seed;
+        
+        [SerializeField] protected GenerationSettings<T> generationTree;
 
         [SerializeReference] protected TSourceSettings source;
         
@@ -21,7 +24,7 @@ namespace PCG.Generation
         {
             TypeMapper.AddType(typeof(T));
             
-            if (generationTree.fieldTree == null)
+            if (generationTree?.fieldTree == null)
                 Reset();
             else if (!generationTree.UpdateFieldTree())
                 Reset();
@@ -30,7 +33,7 @@ namespace PCG.Generation
         protected virtual void Reset()
         {
             seed = new SeedSettings();
-            generationTree = new GenerationSettings<T>();
+            generationTree = new GenerationSettings<T>(allowManaged);
             source = new TSourceSettings();
             seed.Init();
         }

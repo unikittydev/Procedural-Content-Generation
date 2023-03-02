@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace PCG.Generation
@@ -13,7 +14,7 @@ namespace PCG.Generation
         public List<string> choices = new();
         public List<string> choiceNames = new();
 
-        public ObjectAlternative(Type baseParamType, Type[] excludedBaseTypes, bool allowSelf, bool allowGenerics)
+        public ObjectAlternative(Type baseParamType, Type[] excludedBaseTypes, bool allowSelf, bool allowGenerics, bool allowManaged)
         {
             var types = TypeMapper.GetAllTypes();
 
@@ -32,10 +33,15 @@ namespace PCG.Generation
                 // Check if class is assignable
                 if (!IsAssignedFromGenericType(type, baseParamType, out Type paramSubType))
                     continue;
+                // Avoid managed if banned
+                if (!allowManaged && !UnsafeUtility.IsUnmanaged(paramSubType))
+                    continue;
                 
                 AddChoice(paramSubType);
             }
         }
+        
+        public ObjectAlternative(Type baseParamType, Type[] excludedBaseTypes, bool allowSelf, bool allowGenerics) : this(baseParamType, excludedBaseTypes, allowSelf, allowGenerics, true) { }
         
         public ObjectAlternative(Type baseParamType, Type[] excludedBaseTypes, bool allowGenerics) : this(baseParamType, excludedBaseTypes, false, allowGenerics) { }
             
@@ -47,8 +53,8 @@ namespace PCG.Generation
         {
             var choiceTypeName = type.AssemblyQualifiedName;
 
-            var inspectorName = type.GetCustomAttributes(typeof(InspectorNameAttribute), false).FirstOrDefault() as InspectorNameAttribute;
-            var choiceDisplayName = inspectorName?.displayName ?? type.Name;
+            var inspectorName = type.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as DisplayNameAttribute;
+            var choiceDisplayName = inspectorName?.DisplayName ?? type.Name;
             
             choices.Add(choiceTypeName);
             choiceNames.Add(choiceDisplayName);

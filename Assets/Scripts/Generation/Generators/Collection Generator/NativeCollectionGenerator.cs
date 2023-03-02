@@ -8,14 +8,22 @@ namespace PCG.Generation
 {
     public class CustomCollectionGenerator<T> : CustomGenerator<NativeCollectionSourceSettings<T>, T>, IGenerator<IEnumerable<T>> where T : unmanaged
     {
-        private CustomCollectionNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
-        
+        protected override bool allowManaged => false;
+
+        private NativeCollectionNestedFieldGenerator<GenerationSettings<T>, T> behaviourTree;
+
         private ProfilerMarker _generatorMarker = new("CCG:Generate()");
-        
+
         protected override void OnEnable()
         {
             base.OnEnable();
-            behaviourTree = new(generationTree.fieldTree, 0);
+            behaviourTree ??= new(generationTree.fieldTree, 0);
+        }
+
+        protected override void Reset()
+        {
+            base.Reset();
+            behaviourTree ??= new(generationTree.fieldTree, 0);
         }
 
         public IEnumerable<T> Generate(ref Random random)

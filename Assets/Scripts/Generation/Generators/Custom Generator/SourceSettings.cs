@@ -17,6 +17,8 @@ namespace PCG.Generation
         protected SourceSettings()
         {
             providerAlternative = new ObjectAlternative(typeof(TProvider), true);
+            if (providerAlternative.choice != null)
+                provider = (TProvider)TypeMapper.CreateInstanceFromName(providerAlternative.choice);
         }
     }
 }

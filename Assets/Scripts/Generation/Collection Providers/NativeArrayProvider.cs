@@ -5,6 +5,7 @@ using Unity.Collections.LowLevel.Unsafe;
 
 namespace PCG.Generation
 {
+    [DisplayName("Native array")]
     [Serializable]
     public class NativeArrayProvider<T> : INativeCollectionProvider<T> where T : unmanaged
     {

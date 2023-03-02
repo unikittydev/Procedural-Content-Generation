@@ -54,6 +54,7 @@ namespace PCG.Generation.Editor
 
             // "Generate" button
             var generateButton = tree.Q<Button>("generate");
+            
             generateButton.clicked += (serializedObject.targetObject as IGenerateButtonCallback)!.Generate;
 
             return tree;

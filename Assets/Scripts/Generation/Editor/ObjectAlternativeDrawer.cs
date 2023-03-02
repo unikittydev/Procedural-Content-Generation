@@ -16,6 +16,7 @@ namespace PCG.Generation.Editor
             {
                 alternative.SetValueFromName(newValue);
                 property.serializedObject.ApplyModifiedProperties();
+
                 return newValue;
             });
             dropdown.label = property.displayName;

@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Random = Unity.Mathematics.Random;
 
 namespace PCG.Generation

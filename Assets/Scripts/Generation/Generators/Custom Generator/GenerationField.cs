@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PCG.Generation
 {
     [Serializable]
-    public abstract class CustomField
+    public abstract class GenerationField
     {
         [NonSerialized]
         public FieldInfo info;
@@ -19,7 +19,7 @@ namespace PCG.Generation
         [SerializeReference]
         public ObjectAlternative objectAlternative;
 
-        protected CustomField(FieldInfo field)
+        protected GenerationField(FieldInfo field)
         {
             info = field;
             
@@ -30,21 +30,20 @@ namespace PCG.Generation
     }
 
     [Serializable]
-    public abstract class CustomField<TObj, TField> : CustomField
+    public abstract class GenerationField<TObj, TField> : GenerationField
     {
-        protected CustomField(FieldInfo field) : base(field)
+        protected GenerationField(FieldInfo field, bool allowManaged) : base(field)
         {
-            objectAlternative =
-                new ObjectAlternative(typeof(IGenerator<TField>), new[] { typeof(ScriptableObject) }, false, false);
+            objectAlternative = new ObjectAlternative(typeof(IGenerator<TField>), new[] { typeof(ScriptableObject) }, false, false, allowManaged);
         }
     }
 
     [Serializable]
-    public class CustomLeafField<TObj, TField> : CustomField<TObj, TField>
+    public class GenerationLeafField<TObj, TField> : GenerationField<TObj, TField>
     {
         [SerializeReference] public IGenerator<TField> generator;
 
-        public CustomLeafField(FieldInfo field) : base(field)
+        public GenerationLeafField(FieldInfo field, bool allowManaged) : base(field, allowManaged)
         {
             if (objectAlternative.choice != null)
                 generator = (IGenerator<TField>)TypeMapper.CreateInstanceFromName(objectAlternative.choice);
@@ -52,13 +51,13 @@ namespace PCG.Generation
     }
 
     [Serializable]
-    public class CustomNestedField<TObj, TField> : CustomField<TObj, TField>
+    public class GenerationNestedField<TObj, TField> : GenerationField<TObj, TField>
     {
-        [SerializeReference] public List<CustomField> children = new();
+        [SerializeReference] public List<GenerationField> children = new();
 
-        public CustomNestedField(FieldInfo field) : base(field)
+        public GenerationNestedField(FieldInfo field, bool allowManaged) : base(field, allowManaged)
         {
-            objectAlternative.AddChoice(typeof(CustomObjectGeneratorNestedType));
+            objectAlternative.AddChoice(typeof(GenerationNestedType));
         }
     }
 }

@@ -3,6 +3,7 @@ using Random = Unity.Mathematics.Random;
 
 namespace PCG.Generation
 {
+    [DisplayName("Uniform float")]
     [System.Serializable]
     public struct UniformFloatGenerator : IGenerator<float>
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace PCG.Generation
 {
+    [DisplayName("Array")]
     [Serializable]
     public class ArrayProvider<T> : ICollectionProvider<T>
     {
