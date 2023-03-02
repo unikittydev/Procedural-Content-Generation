@@ -1,5 +1,4 @@
-﻿using Unity.Profiling;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PCG.Generation
 {
@@ -8,17 +7,15 @@ namespace PCG.Generation
         public void Generate();
     }
 
-    public abstract class CustomGenerator<TSourceSettings, T> : ScriptableObject
+    public abstract class CustomGenerator<TSourceSettings, T> : ScriptableObject, IGenerateButtonCallback
         where TSourceSettings : SourceSettings, new()
         where T : new()
     {
-        [SerializeField] private SeedSettings seed = new();
+        [SerializeField] protected SeedSettings seed = new();
         
-        [SerializeField] private GenerationSettings<T> generationTree = new();
+        [SerializeField] protected GenerationSettings<T> generationTree = new();
 
-        [SerializeField] private TSourceSettings source;
-        
-        private ProfilerMarker _generatorMarker = new("CCG:Generate()");
+        [SerializeReference] protected TSourceSettings source;
         
         protected virtual void OnEnable()
         {
@@ -37,5 +34,7 @@ namespace PCG.Generation
             source = new TSourceSettings();
             seed.Init();
         }
+
+        public abstract void Generate();
     }
 }

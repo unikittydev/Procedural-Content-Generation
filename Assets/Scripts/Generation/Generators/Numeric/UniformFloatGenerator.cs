@@ -1,4 +1,3 @@
-using Unity.Jobs;
 
 using Random = Unity.Mathematics.Random;
 
@@ -9,11 +8,6 @@ namespace PCG.Generation
     {
         public float min, max;
     
-        static UniformFloatGenerator()
-        {
-            new GenerateFieldJob<UniformFloatGenerator, float>().ScheduleParallel(0, 0, default).Complete();
-        }
-        
         public float Generate(ref Random random)
         {
             return random.NextFloat(min, max);

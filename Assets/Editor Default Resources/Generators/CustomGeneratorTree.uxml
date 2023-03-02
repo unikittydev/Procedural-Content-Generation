@@ -1,6 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor%20Default%20Resources/Generators/style.uss?fileID=7433441132597879392&amp;guid=0918c4acf78ddfb40b9cfe9080204ebb&amp;type=3#style" />
-    <ui:IntegerField label="N" value="1" name="n" binding-path="N" />
     <ui:Foldout text="Seed" name="seed" class="foldout-header" style="-unity-font-style: normal; transition-property: all; transition-duration: 0s; transition-timing-function: ease; transition-delay: 0s;" />
     <ui:Foldout text="Source" name="source" class="foldout-header" style="-unity-font-style: normal; transition-property: all; transition-duration: 0s; transition-timing-function: ease; transition-delay: 0s;" />
     <uie:PropertyField label="Type" name="source-type" />

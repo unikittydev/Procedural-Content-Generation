@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
-
+using UnityEditor;
 using Random = Unity.Mathematics.Random;
 
 namespace PCG.Generation
@@ -91,14 +91,17 @@ namespace PCG.Generation
 
         public CustomCollectionLeafFieldGeneration(CustomLeafField<TObj, TField> field) : base(field)
         {
-            CreateJobWrapper();
+            TryCreateJobWrapper();
         }
 
-        private void CreateJobWrapper()
+        private bool TryCreateJobWrapper()
         {
+            if (!UnsafeUtility.IsUnmanaged(field.generator.GetType()))
+                return false;
             var genType = field.generator.GetType();
             var wrapperType = typeof(JobWrapper<>).MakeGenericType(typeof(TObj), typeof(TField), genType);
             jobWrapper = (JobWrapper)Activator.CreateInstance(wrapperType);
+            return true;
         }
 
         public override unsafe JobHandle GenerateField<T>(INativeCollectionProvider<T> collection, ref Random random,
@@ -106,16 +109,17 @@ namespace PCG.Generation
         {
             if (!field.generate)
                 return dependency;
-
-            if (!jobWrapper.IsValidWrapper(field.generator.GetType()))
-                CreateJobWrapper();
+            
+            if (jobWrapper == null || !jobWrapper.IsValidWrapper(field.generator.GetType()))
+                if (!TryCreateJobWrapper())
+                    return dependency;
 
             void* ptr = collection.GetUnsafePtr();
 
             int sizeOfT = UnsafeUtility.SizeOf<T>();
             int fieldOffset = localFieldOffset + parentFieldOffset;
 
-            return jobWrapper.Schedule(
+            return jobWrapper!.Schedule(
                 ptr, 
                 sizeOfT, 
                 fieldOffset,

@@ -1,52 +1,30 @@
-using System;
 using Unity.Profiling;
-using UnityEngine;
 using UnityEngine.Profiling;
 
 using Random = Unity.Mathematics.Random;
 
 namespace PCG.Generation
 {
-    public class CustomObjectGenerator<T> : GeneratorAsset<T>, IGenerateButtonCallback where T : new()
+    public class CustomObjectGenerator<T> : CustomGenerator<ObjectSourceSettings<T>, T>, IGenerator<T> where T : new()
     {
-        [SerializeField] private SeedSettings seed = new();
-
-        [SerializeField] private GenerationSettings<T> generationTree = new();
-
-        [SerializeField] private ObjectSourceSettings<T> objectSource = new();
-        
         private CustomObjectNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
 
         private ProfilerMarker _generatorMarker = new("COG:Generate()");
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
-            TypeMapper.AddType(typeof(T));
-            
-            if (generationTree.fieldTree == null)
-                Reset();
-            else if (!generationTree.UpdateFieldTree())
-                Reset();
-
+            base.OnEnable();
             behaviourTree = new(generationTree.fieldTree);
         }
-        
-        private void Reset()
-        {
-            seed = new SeedSettings();
-            generationTree = new GenerationSettings<T>();
-            objectSource = new ObjectSourceSettings<T>();
-            seed.Init();
-        }
 
-        public override T Generate(ref Random random)
+        public T Generate(ref Random random)
         {
-            generationTree.currentObject = objectSource.provider.GetObject();
+            generationTree.currentObject = source.provider.GetObject();
             behaviourTree.GenerateField(ref generationTree, ref random);
             return generationTree.currentObject;
         }
 
-        public void Generate()
+        public override void Generate()
         {
             _generatorMarker.Begin();
             generationTree.currentObject = Generate(ref seed.random);

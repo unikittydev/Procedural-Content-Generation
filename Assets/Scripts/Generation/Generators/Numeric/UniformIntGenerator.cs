@@ -1,4 +1,3 @@
-using Unity.Jobs;
 
 using Random = Unity.Mathematics.Random;
 
@@ -9,11 +8,6 @@ namespace PCG.Generation
     {
         public int min, max;
 
-        static UniformIntGenerator()
-        {
-            new GenerateFieldJob<UniformIntGenerator, int>().ScheduleParallel(0, 0, default).Complete();
-        }
-        
         public int Generate(ref Random random)
         {
             return random.NextInt(min, max);

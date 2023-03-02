@@ -6,15 +6,15 @@ using Unity.Collections.LowLevel.Unsafe;
 namespace PCG.Generation
 {
     [Serializable]
-    public struct NativeArrayProvider<T> : INativeCollectionProvider<T> where T : unmanaged
+    public class NativeArrayProvider<T> : INativeCollectionProvider<T> where T : unmanaged
     {
         public int length;
-        public Allocator allocator;
-        public NativeArrayOptions options;
+        public Allocator allocator = Allocator.Temp;
+        public NativeArrayOptions options = NativeArrayOptions.ClearMemory;
 
         private NativeArray<T> array;
         private IEnumerable<T> enumerable;
-
+        
         public int Length => array.Length;
         
         public void Create()

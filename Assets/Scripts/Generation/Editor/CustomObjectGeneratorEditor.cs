@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace PCG.Generation.Editor
 {
-    [CustomEditor(typeof(CustomObjectGenerator<>), true)]
+    [CustomEditor(typeof(CustomGenerator<,>), true)]
     public class CustomObjectGeneratorEditor : UnityEditor.Editor
     {
         [SerializeField] private VisualTreeAsset COGTree;

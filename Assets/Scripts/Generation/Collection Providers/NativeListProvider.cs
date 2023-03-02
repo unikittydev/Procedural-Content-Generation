@@ -9,7 +9,7 @@ namespace PCG.Generation
     public class NativeListProvider<T> : INativeCollectionProvider<T> where T : unmanaged
     {
         public int length;
-        public Allocator allocator;
+        public Allocator allocator = Allocator.Temp;
 
         private NativeList<T> list;
         private IEnumerable<T> enumerable;
