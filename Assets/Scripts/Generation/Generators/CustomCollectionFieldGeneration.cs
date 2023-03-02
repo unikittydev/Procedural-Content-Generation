@@ -1,14 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Codice.Client.BaseCommands.EventTracking;
-using Codice.CM.Common;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
-using UnityEngine;
 
 using Random = Unity.Mathematics.Random;
 
@@ -19,7 +13,7 @@ namespace PCG.Generation
         public int parentFieldOffset;
         public int localFieldOffset;
 
-        public abstract JobHandle GenerateField<T>(NativeArray<T> collection, ref Random random, JobHandle dependency)
+        public abstract JobHandle GenerateField<T>(INativeCollectionProvider<T> collection, ref Random random, JobHandle dependency)
             where T : unmanaged;
     }
 
@@ -46,62 +40,89 @@ namespace PCG.Generation
         : CustomCollectionFieldGeneration<CustomLeafField<TObj, TField>, TObj>
         where TField : unmanaged
     {
-        public CustomCollectionLeafFieldGeneration(CustomLeafField<TObj, TField> field) : base(field)
+        private abstract class JobWrapper
         {
+            private Type previousGeneratorType;
+
+            protected JobWrapper(Type generatorType)
+            {
+                previousGeneratorType = generatorType;
+            }
+            
+            public bool IsValidWrapper(Type currentGeneratorType) => previousGeneratorType == currentGeneratorType;
+            
+            public abstract unsafe JobHandle Schedule(
+                void* ptr,
+                int sizeOfT,
+                int fieldOffset,
+                IGenerator<TField> generator,
+                uint seed,
+                int length,
+                JobHandle dependency);
         }
 
-        public override JobHandle GenerateField<T>(NativeArray<T> collection, ref Random random, JobHandle dependency)
+        private class JobWrapper<TGen> : JobWrapper where TGen : unmanaged, IGenerator<TField>
+        {
+            public JobWrapper() : base(typeof(TGen)) { }
+            
+            public override unsafe JobHandle Schedule(
+                void* ptr,
+                int sizeOfT,
+                int fieldOffset,
+                IGenerator<TField> generator,
+                uint seed,
+                int length,
+                JobHandle dependency)
+            {
+                var job = new GenerateFieldJob<TGen, TField>()
+                {
+                    collection = (byte*)ptr,
+                    sizeOfT = sizeOfT,
+                    fieldOffset = fieldOffset,
+                    generator = (TGen)generator,
+                    seed = seed
+                };
+                return job.ScheduleParallel(length, 0, dependency);
+            }
+
+        }
+
+        private JobWrapper jobWrapper;
+
+        public CustomCollectionLeafFieldGeneration(CustomLeafField<TObj, TField> field) : base(field)
+        {
+            CreateJobWrapper();
+        }
+
+        private void CreateJobWrapper()
+        {
+            var genType = field.generator.GetType();
+            var wrapperType = typeof(JobWrapper<>).MakeGenericType(typeof(TObj), typeof(TField), genType);
+            jobWrapper = (JobWrapper)Activator.CreateInstance(wrapperType);
+        }
+
+        public override unsafe JobHandle GenerateField<T>(INativeCollectionProvider<T> collection, ref Random random,
+            JobHandle dependency)
         {
             if (!field.generate)
                 return dependency;
-            
-            unsafe
-            {
-                IntPtr ptr = new IntPtr(collection.GetUnsafePtr());
-                
-                int sizeOfT = UnsafeUtility.SizeOf<T>();
-                int fieldOffset = localFieldOffset + parentFieldOffset;
-                var generator = field.generator;
 
-                var genType = field.generator.GetType();
-                var wrapperType = typeof(GenerateFieldJobWrapper<,>).MakeGenericType(genType, typeof(TField));
+            if (!jobWrapper.IsValidWrapper(field.generator.GetType()))
+                CreateJobWrapper();
 
-                    IEnumerable<ParameterExpression> args = new ParameterExpression[]
-                {
-                    Expression.Parameter(typeof(IntPtr), "ptr"),
-                    Expression.Parameter(typeof(int), "sizeOfT"),
-                    Expression.Parameter(typeof(int), "fieldOffset"),
-                    Expression.Parameter(typeof(IGenerator<TField>), "generator"),
-                    Expression.Parameter(typeof(Random), "random")
-                };
-                var exprCtor = Expression.New(wrapperType.GetConstructor(new[] { typeof(IntPtr), typeof(int), typeof(int), typeof(IGenerator<TField>), typeof(Random) })!, args);
+            void* ptr = collection.GetUnsafePtr();
 
-                var lambda = Expression.Lambda(exprCtor, args).Compile();
-                var test = lambda.DynamicInvoke(
-                    ptr,
-                    sizeOfT,
-                    fieldOffset,
-                    generator,
-                    random);
+            int sizeOfT = UnsafeUtility.SizeOf<T>();
+            int fieldOffset = localFieldOffset + parentFieldOffset;
 
-                IEnumerable<ParameterExpression> methodArgs = new[]
-                {
-                    Expression.Parameter(typeof(int), "length"),
-                    Expression.Parameter(typeof(int), "batchLoopCount"),
-                    Expression.Parameter(typeof(JobHandle), "dependency")
-                };
-                var exprTarget = Expression.Parameter(test.GetType(), "test");
-                var exprCall =
-                    Expression.Call(exprTarget,
-                        wrapperType.GetMethod("ScheduleParallel", BindingFlags.Instance | BindingFlags.Public)!,
-                        methodArgs);
-                var methodLambda = Expression.Lambda(exprCall, new [] { exprTarget }.Concat(methodArgs)).Compile();
-                
-                JobHandle handle = (JobHandle)methodLambda.DynamicInvoke(test, collection.Length, 0, dependency);
-
-
-                return handle;
-            }
+            return jobWrapper.Schedule(
+                ptr, 
+                sizeOfT, 
+                fieldOffset,
+                field.generator,
+                random.state,
+                collection.Length,
+                dependency);
         }
     }
 
@@ -145,14 +166,19 @@ namespace PCG.Generation
             }
         }
 
-        public override JobHandle GenerateField<T>(NativeArray<T> collection, ref Random random, JobHandle dependency)
+        public override JobHandle GenerateField<T>(INativeCollectionProvider<T> collection, ref Random random, JobHandle dependency)
         {
             if (!field.generate)
                 return dependency;
 
-            // Объединить зависимости
-            foreach (CustomCollectionFieldGeneration<TField> child in children)
-                dependency = child.GenerateField(collection, ref random, dependency);
+            NativeArray<JobHandle> handles = new(children.Count, Allocator.Temp,
+                NativeArrayOptions.UninitializedMemory);
+            for (int i = 0; i < children.Count; i++)
+            {
+                CustomCollectionFieldGeneration<TField> child = children[i];
+                handles[i] = child.GenerateField(collection, ref random, dependency);
+            }
+            dependency = JobHandle.CombineDependencies(handles);
 
             return dependency;
         }

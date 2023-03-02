@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestCollectionGenerator
   m_EditorClassIdentifier: 
   seed:
-    initialSeed: 2095945727
+    initialSeed: 3593332296
     random:
-      state: 206573110
+      state: 914273402
   generationTree:
     fieldTree:
       fieldName: currentObject
@@ -23,39 +23,35 @@ MonoBehaviour:
       fieldTypeName: PCG.Generation.TestManaged, PCG.Generation, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       objectAlternative:
-        rid: 3179538079592480835
+        rid: 3179538090139844873
       children:
-      - rid: 3179538079592480836
-      - rid: 3179538079592480837
-      - rid: 3179538079592480838
-      - rid: 3179538079592480839
-  collectionSource:
+      - rid: 3179538090139844874
+      - rid: 3179538090139844875
+      - rid: 3179538090139844876
+      - rid: 3179538090139844877
+  nativeCollectionSource:
     providerAlternative:
-      rid: 3179538079592480826
+      rid: 3179538090139844859
     provider:
-      rid: 3179538079592481083
+      rid: 3179538090139845012
   isUnmanaged: 1
   update: 0
   references:
     version: 2
     RefIds:
-    - rid: 3179538079592480826
+    - rid: 3179538090139844859
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.NativeArrayProvider`1[[PCG.Generation.TestManaged,
           PCG.Generation, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]],
           PCG.Generation, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         choices:
-        - PCG.Generation.ArrayProvider`1[[PCG.Generation.TestManaged, PCG.Generation,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], PCG.Generation,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         - PCG.Generation.NativeArrayProvider`1[[PCG.Generation.TestManaged, PCG.Generation,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], PCG.Generation,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         choiceNames:
-        - ArrayProvider`1
         - NativeArrayProvider`1
-    - rid: 3179538079592480835
+    - rid: 3179538090139844873
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.CustomObjectGeneratorNestedType, PCG.Generation, Version=0.0.0.0,
@@ -65,7 +61,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
         choiceNames:
         - CustomObjectGeneratorNestedType
-    - rid: 3179538079592480836
+    - rid: 3179538090139844874
       type: {class: 'CustomLeafField`2[[PCG.Generation.TestManaged, PCG.Generation],[System.Single, mscorlib]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -74,10 +70,10 @@ MonoBehaviour:
         fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
-          rid: 3179538079592480840
+          rid: 3179538090139844878
         generator:
-          rid: 3179538079592481084
-    - rid: 3179538079592480837
+          rid: 3179538090139845023
+    - rid: 3179538090139844875
       type: {class: 'CustomLeafField`2[[PCG.Generation.TestManaged, PCG.Generation],[System.Int32, mscorlib]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -86,10 +82,10 @@ MonoBehaviour:
         fieldTypeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
-          rid: 3179538079592480842
+          rid: 3179538090139844880
         generator:
-          rid: 3179538079592481085
-    - rid: 3179538079592480838
+          rid: 3179538090139845024
+    - rid: 3179538090139844876
       type: {class: 'CustomLeafField`2[[PCG.Generation.TestManaged, PCG.Generation],[System.Single, mscorlib]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -98,10 +94,10 @@ MonoBehaviour:
         fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
-          rid: 3179538079592480844
+          rid: 3179538090139844882
         generator:
-          rid: 3179538079592481086
-    - rid: 3179538079592480839
+          rid: 3179538090139845025
+    - rid: 3179538090139844877
       type: {class: 'CustomNestedField`2[[PCG.Generation.TestManaged, PCG.Generation],[PCG.Generation.TestManaged/Struct, PCG.Generation]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -110,37 +106,11 @@ MonoBehaviour:
         fieldTypeName: PCG.Generation.TestManaged+Struct, PCG.Generation, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
         objectAlternative:
-          rid: 3179538079592480846
+          rid: 3179538090139844884
         children:
-        - rid: 3179538079592480847
-        - rid: 3179538079592480848
-    - rid: 3179538079592480840
-      type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
-      data:
-        choice: PCG.Generation.UniformFloatGenerator, PCG.Generation, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        choices:
-        - PCG.Generation.FloatGeneratorReference, PCG.Generation, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        - PCG.Generation.UniformFloatGenerator, PCG.Generation, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        choiceNames:
-        - FloatGeneratorReference
-        - UniformFloatGenerator
-    - rid: 3179538079592480842
-      type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
-      data:
-        choice: PCG.Generation.IntGeneratorReference, PCG.Generation, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        choices:
-        - PCG.Generation.IntGeneratorReference, PCG.Generation, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        - PCG.Generation.UniformIntGenerator, PCG.Generation, Version=0.0.0.0, Culture=neutral,
-          PublicKeyToken=null
-        choiceNames:
-        - IntGeneratorReference
-        - UniformIntGenerator
-    - rid: 3179538079592480844
+        - rid: 3179538090139844885
+        - rid: 3179538090139844886
+    - rid: 3179538090139844878
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.FloatGeneratorReference, PCG.Generation, Version=0.0.0.0,
@@ -153,7 +123,33 @@ MonoBehaviour:
         choiceNames:
         - FloatGeneratorReference
         - UniformFloatGenerator
-    - rid: 3179538079592480846
+    - rid: 3179538090139844880
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
+      data:
+        choice: PCG.Generation.IntGeneratorReference, PCG.Generation, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.IntGeneratorReference, PCG.Generation, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - PCG.Generation.UniformIntGenerator, PCG.Generation, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        choiceNames:
+        - IntGeneratorReference
+        - UniformIntGenerator
+    - rid: 3179538090139844882
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
+      data:
+        choice: PCG.Generation.FloatGeneratorReference, PCG.Generation, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.FloatGeneratorReference, PCG.Generation, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, PCG.Generation, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - FloatGeneratorReference
+        - UniformFloatGenerator
+    - rid: 3179538090139844884
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.CustomObjectGeneratorNestedType, PCG.Generation, Version=0.0.0.0,
@@ -163,7 +159,7 @@ MonoBehaviour:
           Culture=neutral, PublicKeyToken=null
         choiceNames:
         - CustomObjectGeneratorNestedType
-    - rid: 3179538079592480847
+    - rid: 3179538090139844885
       type: {class: 'CustomLeafField`2[[PCG.Generation.TestManaged/Struct, PCG.Generation],[System.Single, mscorlib]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -172,10 +168,10 @@ MonoBehaviour:
         fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
-          rid: 3179538079592480849
+          rid: 3179538090139844887
         generator:
-          rid: 3179538079592481087
-    - rid: 3179538079592480848
+          rid: 3179538090139845026
+    - rid: 3179538090139844886
       type: {class: 'CustomLeafField`2[[PCG.Generation.TestManaged/Struct, PCG.Generation],[System.Int32, mscorlib]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
@@ -184,10 +180,10 @@ MonoBehaviour:
         fieldTypeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
-          rid: 3179538079592480851
+          rid: 3179538090139844889
         generator:
-          rid: 3179538079592481088
-    - rid: 3179538079592480849
+          rid: 3179538090139845027
+    - rid: 3179538090139844887
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.FloatGeneratorReference, PCG.Generation, Version=0.0.0.0,
@@ -200,7 +196,7 @@ MonoBehaviour:
         choiceNames:
         - FloatGeneratorReference
         - UniformFloatGenerator
-    - rid: 3179538079592480851
+    - rid: 3179538090139844889
       type: {class: ObjectAlternative, ns: PCG.Generation, asm: PCG.Generation}
       data:
         choice: PCG.Generation.IntGeneratorReference, PCG.Generation, Version=0.0.0.0,
@@ -213,34 +209,34 @@ MonoBehaviour:
         choiceNames:
         - IntGeneratorReference
         - UniformIntGenerator
-    - rid: 3179538079592481083
+    - rid: 3179538090139845012
       type: {class: 'NativeArrayProvider`1[[PCG.Generation.TestManaged, PCG.Generation]]',
         ns: PCG.Generation, asm: PCG.Generation}
       data:
-        length: 10000000
+        length: 100000
         allocator: 4
-        options: 1
-    - rid: 3179538079592481084
+        options: 0
+    - rid: 3179538090139845023
       type: {class: UniformFloatGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0
         max: 1
-    - rid: 3179538079592481085
+    - rid: 3179538090139845024
       type: {class: UniformIntGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0
         max: 1
-    - rid: 3179538079592481086
+    - rid: 3179538090139845025
       type: {class: UniformFloatGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0
         max: 1
-    - rid: 3179538079592481087
+    - rid: 3179538090139845026
       type: {class: UniformFloatGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0
         max: 1
-    - rid: 3179538079592481088
+    - rid: 3179538090139845027
       type: {class: UniformIntGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0

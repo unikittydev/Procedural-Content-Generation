@@ -11,8 +11,7 @@ namespace PCG.Generation
 
         static UniformDoubleGenerator()
         {
-            new GenerateFieldJobWrapper<UniformDoubleGenerator, double>.GenerateFieldJob()
-                .ScheduleParallel(0, 0, default).Complete();
+            new GenerateFieldJob<UniformDoubleGenerator, double>().ScheduleParallel(0, 0, default).Complete();
         }
         
         public double Generate(ref Random random)

@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Profiling;
-using Debug = UnityEngine.Debug;
+
 using Random = Unity.Mathematics.Random;
 
 namespace PCG.Generation
@@ -17,7 +16,7 @@ namespace PCG.Generation
         [SerializeField]
         private GenerationSettings<T> generationTree = new();
         [SerializeField]
-        private CollectionSourceSettings<T> collectionSource = new();
+        private NativeCollectionSourceSettings<T> nativeCollectionSource = new();
         
         private CustomCollectionNestedFieldGeneration<GenerationSettings<T>, T> behaviourTree;
         
@@ -60,25 +59,15 @@ namespace PCG.Generation
 
         public override IEnumerable<T> Generate(ref Random random)
         {
-            var col = (NativeArray<T>)collectionSource.provider.GetCollection();
-            behaviourTree.GenerateField(col, ref random, default).Complete();
-            return col;
+            behaviourTree.GenerateField(nativeCollectionSource.provider, ref random, default).Complete();
+            return nativeCollectionSource.provider.GetCollection();
         }
 
         public void Generate()
         {
-            var sw = Stopwatch.StartNew();
             _generatorMarker.Begin();
-            var col = Generate(ref seed.random);
+            Generate(ref seed.random);
             _generatorMarker.End();
-            sw.Stop();
-
-            var nativeArray = (NativeArray<T>)col;
-            for (int i = 0; i < 10; i++)
-            {
-                Debug.Log(nativeArray[i]);
-            }
-            nativeArray.Dispose();
             Profiler.enabled = false;
         }
 
@@ -86,12 +75,13 @@ namespace PCG.Generation
         {
             if (!update) return;
 
-            collectionSource.provider = new NativeArrayProvider<T>
+            nativeCollectionSource.provider = new NativeArrayProvider<T>
             {
                 allocator = Allocator.Persistent,
                 length = 100000,
-                options = NativeArrayOptions.ClearMemory
+                options = NativeArrayOptions.UninitializedMemory
             };
+            nativeCollectionSource.provider.Create();
             update = false;
             Generate();
         }

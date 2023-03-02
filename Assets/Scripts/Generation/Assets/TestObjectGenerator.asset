@@ -15,7 +15,7 @@ MonoBehaviour:
   seed:
     initialSeed: 1862112956
     random:
-      state: 2358312708
+      state: 3451368439
   generationTree:
     fieldTree:
       fieldName: currentObject
@@ -239,7 +239,7 @@ MonoBehaviour:
       type: {class: UniformFloatGenerator, ns: PCG.Generation, asm: PCG.Generation}
       data:
         min: 0
-        max: 1
+        max: 1111
     - rid: 3179538076617146866
       type: {class: 'ReferenceObjectProvider`1[[PCG.Generation.Test, PCG.Generation]]',
         ns: PCG.Generation, asm: PCG.Generation}

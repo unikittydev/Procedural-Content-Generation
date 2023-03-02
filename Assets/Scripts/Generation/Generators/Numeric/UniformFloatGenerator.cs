@@ -11,8 +11,7 @@ namespace PCG.Generation
     
         static UniformFloatGenerator()
         {
-            new GenerateFieldJobWrapper<UniformFloatGenerator, float>.GenerateFieldJob()
-                .ScheduleParallel(0, 0, default).Complete();
+            new GenerateFieldJob<UniformFloatGenerator, float>().ScheduleParallel(0, 0, default).Complete();
         }
         
         public float Generate(ref Random random)
