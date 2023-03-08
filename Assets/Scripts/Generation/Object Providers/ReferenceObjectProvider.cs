@@ -4,9 +4,10 @@ namespace PCG.Generation
 {
     [DisplayName("Reference")]
     [System.Serializable]
-    public class ReferenceObjectProvider<T> : IObjectProvider<T>
+    public class ReferenceObjectProvider<T> : IObjectProvider<T> where T : Object
     {
-        [SerializeReference]
+        //[SerializeReference]
+        [SerializeField]
         private T reference;
         
         public T GetObject()

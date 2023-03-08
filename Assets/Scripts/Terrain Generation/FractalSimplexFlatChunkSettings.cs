@@ -34,7 +34,7 @@ namespace PCG.Terrain
                 
                 float2 localPos = new float2(x, y) + chunkWorldPos;
 
-                noiseValue noise = Evaluate(localPos);
+                terrainHeight noise = Evaluate(localPos);
                 
                 density[index] = noise.value;
 
@@ -44,15 +44,15 @@ namespace PCG.Terrain
             }
             
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private noiseValue Evaluate(float2 pos)
+            private terrainHeight Evaluate(float2 pos)
             {
-                var value = new noiseValue();
+                var value = new terrainHeight();
 
                 float amplitude = 1f, amplitudeSum = 0f, frequency = set.frequency;
                 for (int i = 0; i < set.octaves; i++)
                 {
-                    noiseValue octaveValue = noise.srdnoise(pos * frequency);
-                    octaveValue = new noiseValue(octaveValue.value, octaveValue.derivative * frequency);
+                    terrainHeight octaveValue = noise.srdnoise(pos * frequency);
+                    octaveValue = new terrainHeight(octaveValue.value, octaveValue.derivative * frequency);
                     octaveValue /= 1f + set.erosionPower * math.dot(octaveValue.value, octaveValue.value);
                     value += amplitude * octaveValue;
 
@@ -64,7 +64,7 @@ namespace PCG.Terrain
                 value /= amplitudeSum;
                 value = (value + 1f) * .5f;
                 
-                value = noiseValue.pow(value, set.redistributionPower);
+                value = terrainHeight.pow(value, set.redistributionPower);
                 
                 return value;
             }

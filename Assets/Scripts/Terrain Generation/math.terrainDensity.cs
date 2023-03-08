@@ -1,31 +1,20 @@
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 
 namespace PCG.Terrain
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public readonly struct noiseValue
+    public readonly partial struct terrainDensity
     {
-        public readonly float value;
-        public readonly float2 derivative;
-
-        public noiseValue(in float value, in float2 derivative)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator terrainDensity(in float4 a)
         {
-            this.value = value;
-            this.derivative = derivative;
+            return new terrainDensity(a.x, a.yzw);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator noiseValue(in float3 a)
+        public static terrainDensity operator +(in terrainDensity a)
         {
-            return new noiseValue(a.x, a.yz);
-        }
-        
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator +(in noiseValue a)
-        {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value,
                 a.derivative
@@ -33,9 +22,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator +(in noiseValue a, in float b)
+        public static terrainDensity operator +(in terrainDensity a, in float b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value + b,
                 a.derivative
@@ -43,9 +32,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator +(in float a, in noiseValue b)
+        public static terrainDensity operator +(in float a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a + b.value,
                 b.derivative
@@ -53,9 +42,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator +(in noiseValue a, in noiseValue b)
+        public static terrainDensity operator +(in terrainDensity a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value + b.value,
                 a.derivative + b.derivative
@@ -63,9 +52,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator -(in noiseValue a)
+        public static terrainDensity operator -(in terrainDensity a)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 -a.value,
                 -a.derivative
@@ -73,9 +62,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator -(in noiseValue a, in float b)
+        public static terrainDensity operator -(in terrainDensity a, in float b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value - b,
                 a.derivative
@@ -83,9 +72,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator -(in float a, in noiseValue b)
+        public static terrainDensity operator -(in float a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a - b.value,
                 -b.derivative
@@ -93,9 +82,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator -(in noiseValue a, in noiseValue b)
+        public static terrainDensity operator -(in terrainDensity a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value - b.value,
                 a.derivative - b.derivative
@@ -103,9 +92,9 @@ namespace PCG.Terrain
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator *(in noiseValue a, in float b)
+        public static terrainDensity operator *(in terrainDensity a, in float b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value * b,
                 a.derivative * b
@@ -113,9 +102,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator *(in float a, in noiseValue b)
+        public static terrainDensity operator *(in float a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a * b.value,
                 a * b.derivative
@@ -123,9 +112,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator *(in noiseValue a, in noiseValue b)
+        public static terrainDensity operator *(in terrainDensity a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value * b.value,
                 a.value * b.derivative + a.derivative * b.value
@@ -133,9 +122,9 @@ namespace PCG.Terrain
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator /(in noiseValue a, in float b)
+        public static terrainDensity operator /(in terrainDensity a, in float b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value / b,
                 a.derivative / b
@@ -143,9 +132,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator /(in float a, in noiseValue b)
+        public static terrainDensity operator /(in float a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a / b.value,
                 -a * b.derivative / (b.value * b.value)
@@ -153,9 +142,9 @@ namespace PCG.Terrain
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue operator /(in noiseValue a, in noiseValue b)
+        public static terrainDensity operator /(in terrainDensity a, in terrainDensity b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 a.value / b.value,
                 (a.derivative * b.value - b.derivative * a.value) / (b.value * b.value)
@@ -163,13 +152,13 @@ namespace PCG.Terrain
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static noiseValue pow(in noiseValue a, in float b)
+        public static terrainDensity pow(in terrainDensity a, in float b)
         {
-            return new noiseValue
+            return new terrainDensity
             (
                 math.pow(a.value, b),
                 b * a.derivative * math.pow(a.value, b - 1f)
             );
         }
-    }   
+    }
 }
