@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [System.Serializable]
     public abstract class TextureCreator

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Unity.Mathematics;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     public readonly partial struct terrainHeight
     {

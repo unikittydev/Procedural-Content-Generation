@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using Unity.Mathematics;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [StructLayout(LayoutKind.Sequential)]
     public readonly partial struct terrainDensity

@@ -7,7 +7,7 @@ using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(FlatWorld))]

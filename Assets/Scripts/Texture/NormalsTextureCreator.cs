@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [System.Serializable]
     public class NormalsTextureCreator : TextureCreator

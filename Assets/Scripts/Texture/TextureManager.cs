@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     public class TextureManager : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [RequireComponent(typeof(FlatWorld), typeof(FlatChunkMeshBuilder))]
     public class RangeFlatWorldCreator : MonoBehaviour

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [DisallowMultipleComponent]
     public class FlatWorld : MonoBehaviour

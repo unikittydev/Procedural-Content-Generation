@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [CreateAssetMenu(menuName = "PCG/Terrain/Fractal Simplex Settings", fileName = "New Fractal Simplex Settings")]
     public class FractalSimplexFlatChunkSettings : FlatChunkSettings

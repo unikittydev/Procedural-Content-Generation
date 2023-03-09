@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     public abstract class FlatChunkSettings : ScriptableObject
     {

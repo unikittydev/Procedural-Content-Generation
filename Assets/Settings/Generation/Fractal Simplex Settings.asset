@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12e3012e7d26cb149897e186dfe7ba9c, type: 3}
   m_Name: Fractal Simplex Settings
   m_EditorClassIdentifier: 
-  dirty: 0
+  dirty: 1
   settings:
     frequency: 0.006
     persistence: 0.45
     lacunarity: 2
-    octaves: 8
+    octaves: 6
     redistributionPower: 5.2
-    erosionPower: 1
+    erosionPower: 2

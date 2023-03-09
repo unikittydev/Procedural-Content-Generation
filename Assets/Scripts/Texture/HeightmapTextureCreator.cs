@@ -3,7 +3,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
 
-namespace PCG.Terrain
+namespace PCG.TerrainGeneration
 {
     [System.Serializable]
     public class HeightmapTextureCreator : TextureCreator
