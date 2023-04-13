@@ -1,5 +1,5 @@
 ﻿
-namespace PCG.TerrainGeneration
+namespace PCG.Terrain
 {
     public enum ChunkMeshTextureFormat
     {

@@ -120,7 +120,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Main_Smoothness: 0.31
+    - _Main_Frequency: 0.01
+    - _Main_Smoothness: 0.227
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -129,8 +130,8 @@ Material:
     - _ReceiveShadows: 0
     - _SET_NORMALS: 0
     - _Set_Normals: 0
-    - _Slope_Smoothness: 0.078
-    - _Slope_Strength: 0.15
+    - _Slope_Smoothness: 0
+    - _Slope_Strength: 0.27
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -143,7 +144,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Main_Color: {r: 0.28847343, g: 0.4339623, b: 0.16580635, a: 1}
-    - _Slope_Color: {r: 0.38679248, g: 0.25651294, b: 0.14413494, a: 1}
+    - _Main_Color: {r: 0.49663168, g: 0.7169812, b: 0.3077608, a: 1}
+    - _Secondary_Color: {r: 0.39225194, g: 0.6132076, b: 0.25743148, a: 0}
+    - _Slope_Color: {r: 0.41509432, g: 0.3689236, b: 0.33090067, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

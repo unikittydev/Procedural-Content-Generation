@@ -161,7 +161,7 @@ MonoBehaviour:
         ns: PCG.Generation, asm: PCG.Generation}
       data:
         fieldName: fieldA2
-        generate: 1
+        generate: 0
         fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:
@@ -173,7 +173,7 @@ MonoBehaviour:
         ns: PCG.Generation, asm: PCG.Generation}
       data:
         fieldName: fieldB2
-        generate: 1
+        generate: 0
         fieldTypeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
         objectAlternative:

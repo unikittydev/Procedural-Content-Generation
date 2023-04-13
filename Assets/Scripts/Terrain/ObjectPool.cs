@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace PCG.Terrain
 {
-    public class ObjectPool<T> : MonoBehaviour where T : Component
+    public abstract class ObjectPool<T> : MonoBehaviour where T : Component
     {
         [SerializeField]
         private int capacity;
 
         [SerializeField]
-        private T prefab;
+        protected T prefab;
 
         private Queue<T> pool;
 
@@ -17,38 +17,43 @@ namespace PCG.Terrain
 
         private void Awake()
         {
-            disabledChild = new GameObject("Pool").transform;
+            disabledChild = new GameObject($"Pool of {typeof(T).Name}").transform;
             disabledChild.gameObject.SetActive(false);
         }
 
         private void Start()
         {
+            InitPrefab();
+            
             pool = new Queue<T>(capacity);
 
             for (int i = 0; i < capacity; i++)
                 AddInstance();
         }
 
-        private void AddInstance()
+        protected virtual void InitPrefab() { }
+
+        protected virtual T AddInstance()
         {
-            var chunk = Instantiate(prefab, disabledChild);
-            chunk.name += chunk.GetInstanceID();
-            pool.Enqueue(chunk);
+            var instance = Instantiate(prefab, disabledChild);
+            instance.name += instance.GetInstanceID();
+            pool.Enqueue(instance);
+            return instance;
         }
         
-        public void Add(T chunk)
+        public void Add(T instance)
         {
-            chunk.transform.SetParent(disabledChild);
-            pool.Enqueue(chunk);
+            instance.transform.SetParent(disabledChild);
+            pool.Enqueue(instance);
         }
         
         public T Get(Transform parent)
         {
             if (pool.Count == 0)
                 AddInstance();
-            T chunk = pool.Dequeue();
-            chunk.transform.SetParent(parent);
-            return chunk;
+            T instance = pool.Dequeue();
+            instance.transform.SetParent(parent);
+            return instance;
         }
 
         public T Get() => Get(null);

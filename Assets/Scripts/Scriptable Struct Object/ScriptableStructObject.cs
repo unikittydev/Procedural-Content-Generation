@@ -6,7 +6,7 @@ using UnityEditor;
 
 namespace PCG
 {
-    public abstract class ScriptableStructObject<T> : ScriptableObject where T : struct
+    public abstract class ScriptableStructObject<T> : ScriptableObject where T : unmanaged
     {
         [SerializeField] private T _value;
 
