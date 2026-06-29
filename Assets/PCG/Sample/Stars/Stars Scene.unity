@@ -1173,7 +1173,7 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
-    enabled: 0
+    enabled: 1
     type: 5
     angle: 25
     length: 5
@@ -1375,12 +1375,12 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 0
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5279,5 +5279,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 1924432807}
-  generator: {fileID: 11400000, guid: d2f7327a1d5d8af4086557de13bce45e, type: 2}
-  initialSeed: 2147483647
+  generator: {fileID: 11400000, guid: bcea0bfb8caee754695f630261214980, type: 2}
+  initialSeed: 657456

@@ -5,19 +5,13 @@ namespace PCG.Terrain
 {
     public abstract class Chunk2DGenerationStage : ScriptableObject
     {
-        [SerializeField] private ChunkState state;
+        [field: SerializeField]
+        public ChunkState state { get; private set; }
 
+        public Chunk2D currentChunk { get; set; }
+        
         public abstract void Init(Chunk2DGenerator generator);
 
-        public virtual void OnBeforeGenerate(Chunk2D chunk)
-        {
-            chunk.state = state;
-        }
-        
-        public abstract IEnumerator Generate(Chunk2D chunk);
-        
-        public virtual void OnAfterGenerate(Chunk2D chunk)
-        {
-        }
+        public abstract IEnumerator Generate();
     }
 }

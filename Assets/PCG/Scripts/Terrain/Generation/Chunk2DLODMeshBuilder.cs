@@ -115,8 +115,6 @@ namespace PCG.Terrain.Generation
             Vector3 meshScale = Vector3.one * chunk.world.chunkWorldSize / (chunk.world.chunkResolutions[chunk.lodLevel].x - 1);
             meshScale.y = chunk.world.worldHeight;
             
-            var mesh = chunk.filter.mesh;
-            mesh.Clear();
 
             var vertices = new NativeArray<float3>(arrayLength, Allocator.Persistent,
                 NativeArrayOptions.UninitializedMemory);
@@ -126,6 +124,9 @@ namespace PCG.Terrain.Generation
 
             yield return new WaitUntil(() => handle.IsCompleted); 
             handle.Complete();
+            
+            var mesh = chunk.filter.mesh;
+            mesh.Clear();
             
             mesh.subMeshCount = 1;
 
@@ -152,7 +153,7 @@ namespace PCG.Terrain.Generation
                 mesh.RecalculateTangents();
         }
 
-        private JobHandle CalculateTriangles(in int2 size, NativeArray<ushort> triangles)
+        private static JobHandle CalculateTriangles(in int2 size, NativeArray<ushort> triangles)
         {
             return new CalculateTrianglesJob()
             {

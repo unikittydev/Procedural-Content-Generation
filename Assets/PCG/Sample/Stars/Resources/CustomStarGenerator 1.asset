@@ -1,0 +1,465 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b38fba5d444e019f42b75cf82eda0e, type: 3}
+  m_Name: CustomStarGenerator 1
+  m_EditorClassIdentifier: 
+  seed:
+    initialSeed: 3528843890
+    random:
+      state: 2909354655
+  generationTree:
+    fieldTree:
+      fieldName: currentObject
+      generate: 1
+      fieldTypeName: PCG.SampleStar, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectAlternative:
+        rid: 5150213722349240374
+      children:
+      - rid: 5150213722349240375
+      - rid: 5150213722349240376
+      - rid: 5150213722349240377
+      - rid: 5150213722349240378
+      - rid: 5150213722349240379
+      - rid: 5150213722349240380
+    currentObject:
+      position:
+        x: 0
+        y: 0
+        z: 0
+      mass: 0
+      temperature: 0
+      radius: 0
+      luminocity: 0
+      color: {r: 0, g: 0, b: 0, a: 0}
+  source:
+    rid: 5150213722349240381
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1697181176465457159
+      type: {class: 'NativeArrayProvider`1[[PCG.SampleStar, Assembly-CSharp]]', ns: PCG.Generation,
+        asm: Assembly-CSharp}
+      data:
+        length: 0
+        allocator: 2
+        options: 1
+    - rid: 5150213722349240374
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.GenerationNestedType, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.GenerationNestedType, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - GenerationNestedType
+    - rid: 5150213722349240375
+      type: {class: 'GenerationNestedField`2[[PCG.SampleStar, Assembly-CSharp],[Unity.Mathematics.float3, Unity.Mathematics]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: position
+        generate: 1
+        fieldTypeName: Unity.Mathematics.float3, Unity.Mathematics, Version=1.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        objectAlternative:
+          rid: 5150213722349240382
+        children:
+        - rid: 5150213722349240383
+        - rid: 5150213722349240384
+        - rid: 5150213722349240385
+    - rid: 5150213722349240376
+      type: {class: 'GenerationLeafField`2[[PCG.SampleStar, Assembly-CSharp],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: mass
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240386
+        generator:
+          rid: -2
+    - rid: 5150213722349240377
+      type: {class: 'GenerationLeafField`2[[PCG.SampleStar, Assembly-CSharp],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: temperature
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240388
+        generator:
+          rid: 5150213722349240389
+    - rid: 5150213722349240378
+      type: {class: 'GenerationLeafField`2[[PCG.SampleStar, Assembly-CSharp],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: radius
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240390
+        generator:
+          rid: 5150213722349240391
+    - rid: 5150213722349240379
+      type: {class: 'GenerationLeafField`2[[PCG.SampleStar, Assembly-CSharp],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: luminocity
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240392
+        generator:
+          rid: -2
+    - rid: 5150213722349240380
+      type: {class: 'GenerationNestedField`2[[PCG.SampleStar, Assembly-CSharp],[UnityEngine.Color, UnityEngine.CoreModule]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: color
+        generate: 1
+        fieldTypeName: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        objectAlternative:
+          rid: 5150213722349240394
+        children:
+        - rid: 5150213722349240395
+        - rid: 5150213722349240396
+        - rid: 5150213722349240397
+        - rid: 5150213722349240398
+    - rid: 5150213722349240381
+      type: {class: 'NativeCollectionSourceSettings`1[[PCG.SampleStar, Assembly-CSharp]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        providerAlternative:
+          rid: 5150213722349240399
+        provider:
+          rid: 1697181176465457159
+    - rid: 5150213722349240382
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.UniformFloat3Generator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.UniformFloat3Generator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        - PCG.Generation.GenerationNestedType, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Uniform float3
+        - GenerationNestedType
+    - rid: 5150213722349240383
+      type: {class: 'GenerationLeafField`2[[Unity.Mathematics.float3, Unity.Mathematics],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: x
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240401
+        generator:
+          rid: -2
+    - rid: 5150213722349240384
+      type: {class: 'GenerationLeafField`2[[Unity.Mathematics.float3, Unity.Mathematics],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: y
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240403
+        generator:
+          rid: -2
+    - rid: 5150213722349240385
+      type: {class: 'GenerationLeafField`2[[Unity.Mathematics.float3, Unity.Mathematics],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: z
+        generate: 1
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240405
+        generator:
+          rid: 5150213722349240417
+    - rid: 5150213722349240386
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240388
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240389
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240390
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240391
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240392
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240394
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.GenerationNestedType, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.GenerationNestedType, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - GenerationNestedType
+    - rid: 5150213722349240395
+      type: {class: 'GenerationLeafField`2[[UnityEngine.Color, UnityEngine.CoreModule],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: r
+        generate: 0
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240407
+        generator:
+          rid: 5150213722349240408
+    - rid: 5150213722349240396
+      type: {class: 'GenerationLeafField`2[[UnityEngine.Color, UnityEngine.CoreModule],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: g
+        generate: 0
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240409
+        generator:
+          rid: 5150213722349240410
+    - rid: 5150213722349240397
+      type: {class: 'GenerationLeafField`2[[UnityEngine.Color, UnityEngine.CoreModule],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: b
+        generate: 0
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240411
+        generator:
+          rid: 5150213722349240412
+    - rid: 5150213722349240398
+      type: {class: 'GenerationLeafField`2[[UnityEngine.Color, UnityEngine.CoreModule],[System.Single, mscorlib]]',
+        ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        fieldName: a
+        generate: 0
+        fieldTypeName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+        objectAlternative:
+          rid: 5150213722349240413
+        generator:
+          rid: 5150213722349240414
+    - rid: 5150213722349240399
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.NativeArrayProvider`1[[PCG.SampleStar, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.NativeArrayProvider`1[[PCG.SampleStar, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        - PCG.Generation.NativeListProvider`1[[PCG.SampleStar, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Native array
+        - Native list
+    - rid: 5150213722349240401
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240403
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240405
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240407
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240408
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240409
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240410
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240411
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240412
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240413
+      type: {class: ObjectAlternative, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        choice: PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choices:
+        - PCG.Generation.StarMassGenerator, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+          PublicKeyToken=null
+        - PCG.Generation.UniformFloatGenerator, Assembly-CSharp, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        choiceNames:
+        - Mass distribution
+        - Uniform float
+    - rid: 5150213722349240414
+      type: {class: StarMassGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: 0
+        max: 0
+        a: 0
+        b: 0
+    - rid: 5150213722349240417
+      type: {class: UniformFloatGenerator, ns: PCG.Generation, asm: Assembly-CSharp}
+      data:
+        min: -100
+        max: 100

@@ -26,9 +26,9 @@ namespace PCG.Terrain
                 lodBuilders[i] = new Chunk2DLODMeshBuilder(world.chunkResolutions[i]);
         }
 
-        public override IEnumerator Generate(Chunk2D chunk)
+        public override IEnumerator Generate()
         {
-            yield return lodBuilders[chunk.lodLevel].Generate(this, chunk);
+            yield return lodBuilders[currentChunk.lodLevel].Generate(this, currentChunk);
         }
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52965a5ef6144dac834218b079bcd507, type: 3}
   m_Name: Chunk2DGenerationGeneratorStage
   m_EditorClassIdentifier: 
-  state: 2
-  asset: {fileID: 11400000, guid: fc193904fa8cbb34da1e47c82a143507, type: 2}
+  <state>k__BackingField: 2
+  asset: {fileID: 11400000, guid: 6012c9c854dbaaa4cb35334b2dfcea1f, type: 2}

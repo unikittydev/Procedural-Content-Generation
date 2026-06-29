@@ -27,12 +27,17 @@ namespace PCG.Terrain
             
             pool = new Queue<T>(capacity);
 
-            for (int i = 0; i < capacity; i++)
-                AddInstance();
+            AddInstances(capacity);
         }
 
         protected virtual void InitPrefab() { }
 
+        private void AddInstances(int count)
+        {
+            for (int i = 0; i < count; i++)
+                AddInstance();
+        }
+        
         protected virtual T AddInstance()
         {
             var instance = Instantiate(prefab, disabledChild);
@@ -50,7 +55,7 @@ namespace PCG.Terrain
         public T Get(Transform parent)
         {
             if (pool.Count == 0)
-                AddInstance();
+                AddInstances(capacity);
             T instance = pool.Dequeue();
             instance.transform.SetParent(parent);
             return instance;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PCG.Terrain;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -77,16 +78,35 @@ namespace PCG.Generation
             int index = choiceNames.IndexOf(newName);
             choice = choices[index];
         }
+
+        public Type GetChoiceType()
+        {
+            return TypeMapper.GetTypeFromName(choice);
+        }
         
         // true (ReferenceObjectProvider<>, IObjectProvider<T>, out ReferenceObjectProvider<T>)
         // true (UniformFloatGenerator, IGenerator<float>, out UniformFloatGenerator)
+        // true (ChunkHeight2D, IChunk2D, out ChunkHeight2D)
         private static bool IsAssignedFromGenericType(Type subType, Type paramBaseType, out Type paramSubType)
         {
             try
             {
-                // decompose T<U0, ..., Un> into T<> and [U0, ..., Un]
+                if (!paramBaseType.IsGenericType)
+                {
+                    paramSubType = subType;
+                    return paramBaseType.IsAssignableFrom(subType);
+                }
+
+                    // decompose T<U0, ..., Un> into T<> and [U0, ..., Un]
                 Type baseType = paramBaseType.GetGenericTypeDefinition();
                 Type[] baseParams = paramBaseType.GetGenericArguments();
+
+                if (subType == typeof(ChunkHeight2D))
+                {
+                    Debug.Log(baseType.FullName);
+                    foreach (var param in baseParams)
+                        Debug.Log(param.FullName);
+                }
 
                 paramSubType = subType.IsGenericType ? subType.MakeGenericType(baseParams) : subType;
                 

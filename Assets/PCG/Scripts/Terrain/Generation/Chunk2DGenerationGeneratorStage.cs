@@ -16,12 +16,11 @@ namespace PCG.Terrain
             this.generator = generator;
         }
 
-        public override IEnumerator Generate(Chunk2D chunk)
+        public override IEnumerator Generate()
         {
-            asset.chunk = chunk;
+            asset.chunk = currentChunk;
 
             yield return asset.GenerateCoroutine(generator.GetRandom());
-            //generator.GetRandom().NextUInt();
         }
     }
 }

@@ -49,15 +49,15 @@ namespace PCG.Terrain
             
             foreach (var stage in stages)
             {
-                stage.OnBeforeGenerate(chunk);
-                yield return StartCoroutine(stage.Generate(chunk));
-                stage.OnAfterGenerate(chunk);
+                stage.currentChunk = chunk;
+                stage.currentChunk.state = stage.state;
+                yield return StartCoroutine(stage.Generate());
             }
             chunk.state = ChunkState.Loaded;
 
             chunkGenerationSet.Remove(chunk);
             
-            Debug.Log($"{chunk.name} is loaded at time {Time.realtimeSinceStartupAsDouble:0.00}", chunk);
+            //Debug.Log($"{chunk.name} is loaded at time {Time.realtimeSinceStartupAsDouble:0.00}", chunk);
         }
     }
 }

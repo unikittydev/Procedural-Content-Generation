@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settings:
     frequency: 0.004
-    persistence: 0.343
-    lacunarity: 2.31
-    octaves: 16
-    redistributionPower: 2.21
-    erosionPower: 0
+    persistence: 0.312
+    lacunarity: 2
+    octaves: 8
+    redistributionPower: 3.62
+    erosionPower: 1
     warpingOffset:
-      x: 11
-      y: 11
-    warpingStrenth: 100
+      x: -356.23434
+      y: 234.28345
+    warpingStrenth: 500
